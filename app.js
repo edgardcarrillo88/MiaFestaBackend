@@ -10,7 +10,7 @@ dbconnect(app)
 
 
 app.use(cors({
-    origin: [process.env.URL_PAGE, "http://localhost:3001"],
+    origin: [process.env.URL_PAGE,"https://miafesta-production.up.railway.app", "http://localhost:3001"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   }));
   
