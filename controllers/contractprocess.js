@@ -6,7 +6,10 @@ const ObtenerEventos = async (req, res) => {
     console.log("Obteniendo eventos");
 
     try {
-        const events = await ContractModel.find();
+        const events = await ContractModel.find(
+            { deleted: false }
+        );
+        console.log("Eventos: ", events.length);
         res.status(200).json(events)
     } catch (error) {
         console.log(error);
@@ -38,10 +41,23 @@ const UpdateEvent = async (req, res) => {
     }
 }
 
+const DeleteEvent = async (req,res)  =>{
+    console.log("Eliminando Evento");
+    const { id } = req.body
+    try {
+        const response = await ContractModel.findByIdAndUpdate(id, { deleted: true });
+        res.status(200).json({ message: "Evento eliminado" })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error al eliminar el evento" })        
+    }
+}
+
 
 module.exports = {
     ObtenerEventos,
     ObtenerEventoUnico,
-    UpdateEvent
+    UpdateEvent,
+    DeleteEvent
 }
 

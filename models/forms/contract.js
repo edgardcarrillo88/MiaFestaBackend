@@ -18,6 +18,14 @@ const formcontractschema = mongoose.Schema({
     MesaGF: String,
     animacion: Boolean,
     acompanhamiento: Boolean,
+    Monto: {
+        type: Number,
+        default: 0,
+    },
+    Adelanto: {
+        type: Number,
+        default: 0,
+    },
     allergies: {
         type: String,
         default: '',
