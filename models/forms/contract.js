@@ -11,7 +11,11 @@ const formcontractschema = mongoose.Schema({
     attendees: Number,
     phone: String,
     paqueteBF: Boolean,
+    DetalleBandejasBF: Array,
+    MesaBF: String,
     paqueteGF: Boolean,
+    DetalleBandejasGF: Array,
+    MesaGF: String,
     animacion: Boolean,
     acompanhamiento: Boolean,
     allergies: {

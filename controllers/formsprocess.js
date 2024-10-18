@@ -3,6 +3,7 @@ const FormContractModel = require('../models/forms/contract');
 
 const RegistrarFormContratos = async (req, res) => {
     console.log("EJecutando la carga de contratos");
+    console.log(req.body);
     try {
         const data = new FormContractModel(req.body);
         await data.save();
