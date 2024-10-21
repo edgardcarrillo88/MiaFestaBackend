@@ -53,11 +53,23 @@ const DeleteEvent = async (req,res)  =>{
     }
 }
 
+const AssignResponsible = async (req, res) => {
+    console.log(req.body);
+    try {
+        const response = await ContractModel.findByIdAndUpdate(req.body.selectedEvent.id, { Responsable: req.body.selectedResponsible });
+        res.status(200).json({ message: "Responsable asignado" })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error al asignar el responsable" })        
+    }
+}
+
 
 module.exports = {
     ObtenerEventos,
     ObtenerEventoUnico,
     UpdateEvent,
-    DeleteEvent
+    DeleteEvent,
+    AssignResponsible
 }
 

@@ -5,6 +5,7 @@ const cors = require('cors')
 const app = express()
 const formcontroller = require('./routes/forms')
 const contractcontroller = require('./routes/contract')
+const socialmediacontroller = require('./routes/socialmedia')
 const path = require('path')
 
 dbconnect(app)
@@ -30,5 +31,6 @@ app.use(express.json({ limit: '50mb' }))
 
 app.use('/api/v1/form',formcontroller)
 app.use('/api/v1/contract', contractcontroller)
+app.use('/api/v1/socialmedia', socialmediacontroller)
 
 app.use(express.static(path.join(__dirname,'public')))

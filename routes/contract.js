@@ -5,6 +5,7 @@ const contractcontroller = require('../controllers/contractprocess');
 
 
 contractrouter.post('/updatestatus',contractcontroller.UpdateEvent)
+contractrouter.post('/assignresponsible',contractcontroller.AssignResponsible)
 contractrouter.post('/deleteevent',contractcontroller.DeleteEvent)
 
 

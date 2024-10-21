@@ -16,8 +16,23 @@ const formcontractschema = mongoose.Schema({
     paqueteGF: Boolean,
     DetalleBandejasGF: Array,
     MesaGF: String,
-    animacion: Boolean,
+    animacion: {
+        type: Boolean,
+        default: false
+    },
     acompanhamiento: Boolean,
+    pinhata: {
+        type: Boolean,
+        default: false
+    },
+    canto: {
+        type: Boolean,
+        default: false
+    },
+    Responsable: {
+        type: String,
+        default: '',
+    },
     Monto: {
         type: Number,
         default: 0,
