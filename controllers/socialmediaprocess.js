@@ -8,7 +8,7 @@ const CreatePost = async (req, res) => {
         const data = new SocialMediaModel({
             descripcion: req.body.description,
             socialmedia: req.body.socialNetwork,
-            Date: new Date(req.body.date)
+            Date: new Date(req.body.Date)
         });
         await data.save();
         res.status(200).json({ message: "Post creado con exito" })
