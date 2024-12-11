@@ -8,9 +8,9 @@ const ObtenerEventos = async (req, res) => {
     try {
         const events = await ContractModel.find(
             { deleted: false }
-        );
+        ).sort({ createdAt: -1 });;
         console.log("Eventos: ", events.length);
-        res.status(200).json(events)
+        res.status(200).json(events);
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Error al obtener los eventos" })
