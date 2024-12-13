@@ -9,6 +9,7 @@ const formcontractschema = mongoose.Schema({
     eventDate: Date,
     time: String,
     attendees: Number,
+    tematica: String,
     phone: String,
     paqueteBF: Boolean,
     DetalleBandejasBF: Array,
@@ -16,19 +17,51 @@ const formcontractschema = mongoose.Schema({
     paqueteGF: Boolean,
     DetalleBandejasGF: Array,
     MesaGF: String,
-    animacion: {
+
+
+    animacionBF: {
         type: Boolean,
         default: false
     },
     acompanhamiento: Boolean,
-    pinhata: {
+    pinhataBF: {
         type: Boolean,
         default: false
     },
-    canto: {
+    cantoBF: {
         type: Boolean,
         default: false
     },
+    personajeBF: {
+        type: Boolean,
+        default: false
+    },
+    personajedescripcionBF: String,
+
+
+
+
+    animacionGF: {
+        type: Boolean,
+        default: false
+    },
+    acompanhamiento: Boolean,
+    pinhataGF: {
+        type: Boolean,
+        default: false
+    },
+    cantoGF: {
+        type: Boolean,
+        default: false
+    },
+    personajeGF: {
+        type: Boolean,
+        default: false
+    },
+    personajedescripcionGF: String,
+
+    
+
     Responsable: {
         type: String,
         default: '',
