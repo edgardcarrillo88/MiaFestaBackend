@@ -37,11 +37,11 @@ const UpdateEvent = async (req, res) => {
         res.status(200).json({ message: "Evento actualizado" })
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: "Error al actualizar el evento" })        
+        res.status(500).json({ message: "Error al actualizar el evento" })
     }
 }
 
-const DeleteEvent = async (req,res)  =>{
+const DeleteEvent = async (req, res) => {
     console.log("Eliminando Evento");
     const { id } = req.body
     try {
@@ -49,20 +49,41 @@ const DeleteEvent = async (req,res)  =>{
         res.status(200).json({ message: "Evento eliminado" })
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: "Error al eliminar el evento" })        
+        res.status(500).json({ message: "Error al eliminar el evento" })
     }
 }
 
 const AssignResponsible = async (req, res) => {
     console.log(req.body);
     try {
-        const response = await ContractModel.findByIdAndUpdate(req.body.selectedEvent.id, { Responsable: req.body.selectedResponsible });
-        res.status(200).json({ message: "Responsable asignado" })
+        // Obtener el documento existente
+        const event = await ContractModel.findById(req.body.selectedEvent.id);
+
+        // Verificar si el campo Responsable es un array y agregar el responsable si no existe
+        const updatedResponsable = event.Responsable || []; // Si es undefined, inicializarlo como array vacío
+
+        // Si el responsable no está ya en la lista y el tamaño es menor a 2, agregarlo
+        if (!updatedResponsable.includes(req.body.selectedResponsible) && updatedResponsable.length < 2) {
+            updatedResponsable.push(req.body.selectedResponsible);
+        }
+
+        // Actualizar el documento en MongoDB
+        const response = await ContractModel.findByIdAndUpdate(
+            req.body.selectedEvent.id,
+            {
+                Responsable: updatedResponsable // Se asigna el array actualizado
+            },
+            { new: true } // Para devolver el documento actualizado
+        );
+
+        // Enviar respuesta al cliente
+        res.status(200).json({ message: "Responsable asignado" });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: "Error al asignar el responsable" })        
+        res.status(500).json({ message: "Error al asignar el responsable" });
     }
-}
+};
+
 
 
 module.exports = {

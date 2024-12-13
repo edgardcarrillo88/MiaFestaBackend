@@ -6,6 +6,39 @@ const FormfeedbackModel = require('../models/forms/feedback');
 const RegistrarFormContratos = async (req, res) => {
     console.log("EJecutando la carga de contratos");
     console.log(req.body);
+
+    const time = req.body.time;
+    console.log("time", time);
+
+    const [hours, minutes] = time.split(':').map(Number);
+
+
+    // Calculamos timestart (1 hora antes)
+    let timestartHours = hours - 1;
+    if (timestartHours < 0) timestartHours += 24;
+
+    const timestart = new Date();
+    timestart.setHours(timestartHours, minutes, 0, 0);
+    const timestart2 = `${String(timestartHours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+
+
+    // Calculamos timefinish (3 horas despues)
+    let timefinishHours = hours + 3;
+    if (timefinishHours >= 24) timefinishHours -= 24;
+
+    const timefinish = new Date();
+    timefinish.setHours(timefinishHours, minutes, 0, 0);
+    const timefinish2 = `${String(timefinishHours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+
+
+    // const timestart2 = timestart.toTimeString().split(' ')[0]
+    // const timefinish2 = timefinish.toTimeString().split(' ')[0]
+
+    req.body.timestart = timestart2;
+    req.body.timefinish = timefinish2;
+  
+
+
     try {
         const data = new FormContractModel(req.body);
         await data.save();
@@ -70,7 +103,7 @@ const RegistrarFormFeedback = async (req, res) => {
         ProblemasComments: req.body.questions[2].description,
         NuevasCaracteristicasComments: req.body.questions[3].description,
         ContactoUltimoMesComments: req.body.questions[4].description,
-        
+
         CalificacionProducto: req.body.ratings[0],
         CalificacionFacilidadUso: req.body.ratings[1],
         CalificacionAtencion: req.body.ratings[2],

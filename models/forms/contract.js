@@ -7,7 +7,13 @@ const formcontractschema = mongoose.Schema({
     address: String,
     ChildName: String,
     eventDate: Date,
+
     time: String,
+    timestart: String,
+    timefinish: String,
+
+
+
     attendees: Number,
     tematica: String,
     phone: String,
@@ -66,6 +72,9 @@ const formcontractschema = mongoose.Schema({
         type: String,
         default: '',
     },
+
+    Responsable: Array,
+
     Monto: {
         type: Number,
         default: 0,
