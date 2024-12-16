@@ -50,6 +50,24 @@ const RegistrarFormContratos = async (req, res) => {
     }
 }
 
+const ActualizarFormContratos =  async (req, res) => {
+    console.log("Ejecutando la actualizacion de contratos");
+    console.log("id: ",req.body.id);
+    console.log("Values: ",req.body.values);
+    // res.status(200).json({ message: "Actualizacion realizada con exito" })
+    try {
+        const data = await FormContractModel.findByIdAndUpdate(req.body.id, req.body.values);
+        await data.save(
+
+        );
+        console.log("Actualizacion realizada con exito");
+        res.status(200).json({ message: "Actualizacion realizada con exito" })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error al actualizar contratos" })
+    }
+}
+
 const RegistrarFormCheckList = async (req, res) => {
     console.log("Ejecutando la carga de form de checklist");
     try {
@@ -152,6 +170,7 @@ const ObtenerEventoUnico = async (req, res) => {
 
 module.exports = {
     RegistrarFormContratos,
+    ActualizarFormContratos,
     RegistrarFormCheckList,
     RegistrarFormSurvey,
     RegistrarFormFeedback,

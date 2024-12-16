@@ -5,6 +5,7 @@ const formcontroller = require('../controllers/formsprocess');
 
 
 formrouter.post('/contracts',formcontroller.RegistrarFormContratos)
+formrouter.post('/updatecontracts',formcontroller.ActualizarFormContratos)
 formrouter.post('/checklist',formcontroller.RegistrarFormCheckList)
 formrouter.post('/survey',formcontroller.RegistrarFormSurvey)
 formrouter.post('/feedback',formcontroller.RegistrarFormFeedback)
