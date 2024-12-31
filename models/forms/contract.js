@@ -91,6 +91,47 @@ const formcontractschema = mongoose.Schema({
         type: String,
         default: 'Pendiente',
     },
+
+    montoinicial: {
+        type: Number,
+        default: 0,
+    },
+
+    montoadelanto: {
+        type: Number,
+        default: 0,
+    },
+
+    montotransporte: {
+        type: Number,
+        default: 0,
+    },
+
+    comentarios1:{
+        type: String,
+        default: '',
+    },
+   
+    comentarios2:{
+        type: String,
+        default: '',
+    },
+
+    comentarios3:{
+        type: String,
+        default: '',
+    },
+
+    comentarios4:{
+        type: String,
+        default: '',
+    },
+
+    comentarios5:{
+        type: String,
+        default: '',
+    },
+
     deleted: { type: Boolean, default: false }
 },
     {

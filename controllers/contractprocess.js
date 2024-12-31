@@ -84,11 +84,30 @@ const AssignResponsible = async (req, res) => {
     }
 };
 
+const ObtenerEventoUnicoCelular = async (req, res) => {
+    console.log("Obteniendo evento unico celular");
+    console.log(req.query);
+    const { celular } = req.query
+    console.log(celular);
+    const celularSinPrefijo = celular.startsWith("51") ? celular.slice(2) : celular;
+    try {
+        const events = await ContractModel.findOne({
+            phone: { $regex: celularSinPrefijo, $options: 'i' }
+        })
+        .sort({ createdAt: -1 });
+        res.status(200).json(events)
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error al obtener los eventos" })
+    }
+}
+
 
 
 module.exports = {
     ObtenerEventos,
     ObtenerEventoUnico,
+    ObtenerEventoUnicoCelular,
     UpdateEvent,
     DeleteEvent,
     AssignResponsible

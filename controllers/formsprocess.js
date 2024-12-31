@@ -57,9 +57,48 @@ const ActualizarFormContratos =  async (req, res) => {
     // res.status(200).json({ message: "Actualizacion realizada con exito" })
     try {
         const data = await FormContractModel.findByIdAndUpdate(req.body.id, req.body.values);
-        await data.save(
+        await data.save();
+        console.log("Actualizacion realizada con exito");
+        res.status(200).json({ message: "Actualizacion realizada con exito" })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error al actualizar contratos" })
+    }
+}
 
+const ActualizarFormContratosDos =  async (req, res) => {
+    console.log("Ejecutando la actualizacion de contratos");
+    console.log("id: ",req.body.id);
+
+    const { 
+        id, 
+        montoinicial, 
+        montoadelanto, 
+        montotransporte, 
+        comentarios1, 
+        comentarios2, 
+        comentarios3, 
+        comentarios4, 
+        comentarios5 
+    } = req.body;
+
+    console.log(req.body);
+
+    try {
+        const data = await FormContractModel.findByIdAndUpdate(id, 
+            {
+            montoinicial,
+            montoadelanto,
+            montotransporte,
+            comentarios1,
+            comentarios2,
+            comentarios3,
+            comentarios4,
+            comentarios5,
+            status: "Aprobado"
+            }
         );
+
         console.log("Actualizacion realizada con exito");
         res.status(200).json({ message: "Actualizacion realizada con exito" })
     } catch (error) {
@@ -104,8 +143,6 @@ const RegistrarFormSurvey = async (req, res) => {
     }
 }
 
-
-
 const RegistrarFormFeedback = async (req, res) => {
     console.log("Ejecutando la carga de form de feedback");
     console.log(req.body);
@@ -140,7 +177,6 @@ const RegistrarFormFeedback = async (req, res) => {
     }
 }
 
-
 const ObtenerEventos = async (req, res) => {
     console.log("Obteniendo eventos");
 
@@ -170,6 +206,7 @@ const ObtenerEventoUnico = async (req, res) => {
 
 module.exports = {
     RegistrarFormContratos,
+    ActualizarFormContratosDos,
     ActualizarFormContratos,
     RegistrarFormCheckList,
     RegistrarFormSurvey,

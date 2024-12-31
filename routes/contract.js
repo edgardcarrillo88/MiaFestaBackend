@@ -11,6 +11,7 @@ contractrouter.post('/deleteevent',contractcontroller.DeleteEvent)
 
 contractrouter.get('/getevents',contractcontroller.ObtenerEventos)
 contractrouter.get('/getsingleevent',contractcontroller.ObtenerEventoUnico)
+contractrouter.get('/getsingleeventcelular',contractcontroller.ObtenerEventoUnicoCelular)
 
 
 
